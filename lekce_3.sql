@@ -1,6 +1,8 @@
 
 -- 3. LEKCE --
 
+SELECT *
+FROM czechia_payroll cp;
 /*
  * Úkol 1: Spočítejte počet řádků v tabulce czechia_price.
  */
@@ -152,7 +154,7 @@ SELECT
 	category_code, 
 	min(value)
 FROM czechia_price cp
-WHERE YEAR(date_from) BETWEEN  2015 AND 2017
+WHERE YEAR(date_from) BETWEEN 2015 AND 2017
 GROUP BY category_code;
 
 /*
@@ -217,6 +219,93 @@ SELECT
 FROM czechia_price cp 
 GROUP BY category_code 
 ORDER BY max(value) - min(value);
+
+/*
+ * Úkol 5: Vyberte pro každou kategorii potravin minimum, maximum a aritmetický průměr 
+ * (v našem případě průměr z průměrů) zaokrouhlený na dvě desetinná místa.
+ */
+
+SELECT category_code,
+	min(value) AS historical_minimum,
+	max(value) AS historial_maximum,
+	round(avg(value),2) AS average 
+FROM czechia_price cp
+GROUP BY category_code;
+
+/*
+ * Úkol 6: Rozšiřte předchozí dotaz tak, že data budou rozdělena i podle kódu kraje
+ *  a seřazena sestupně podle aritmetického průměru.
+ */
+SELECT *
+FROM czechia_price cp; 
+
+SELECT category_code,
+	region_code,
+	min(value) AS historical_minimum,
+	max(value) AS historial_maximum,
+	round(avg(value),2) AS average 
+FROM czechia_price cp
+GROUP BY category_code, region_code 
+ORDER BY average DESC;
+
+/*
+ *      Další operace v klauzuli SELECT
+ */
+
+-- Úkol 1: Vyzkoušejte si následující dotazy. Co vypisují a proč?
+
+SELECT SQRT(-16); 		-- odmocina
+SELECT 10/0;			-- dělění nulou
+SELECT FLOOR(1.56);		-- zaokrouhlední dolů
+SELECT FLOOR(-1.56);	-- zaokrouhlední dolů
+SELECT CEIL(1.56);		-- zaokrouhlední nahoru
+SELECT CEIL(-1.56);		-- zaokrouhlední nahoru
+SELECT ROUND(1.56);		-- zaokrouhlení na desetinná místa(defaloutně na 0)
+SELECT ROUND(-1.56);	-- zaokrouhlení na desetinná místa(defaloutně na 0)
+
+/*
+ * Úkol 2: Vypočítejte průměrné ceny kategorií potravin bez použití funkce AVG() s přesností na dvě desetinná místa.
+ */
+
+SELECT category_code,
+	round(avg(value),2) AS avg_average, -- kontrolní řádek
+	round(sum(value)/count(value),2) AS average 
+FROM czechia_price cp 
+GROUP BY category_code;
+
+/*
+ * Úkol 3: Jaké datové typy budou mít hodnoty v následujících dotazech? 
+ */
+
+SELECT 1;				-- Integer
+SELECT 1.0;				-- Decimal
+SELECT 1 + 1;			-- Integer
+SELECT 1 + 1.0;			-- Decimal
+SELECT 1 + '1';			-- Double
+SELECT 1 + 'a';			-- chyba, nelze Double
+SELECT 1 + '12tatata';	-- Double (pokud obsahuje číslo, tak si ho vytáhne)
+
+/*
+ * Úkol 4: Vyzkoušejte si spustit dotazy, jež operují s textovými řetězci.
+ */
+
+SELECT CONCAT('Hi, ', 'Engeto lektor here!');
+
+SELECT CONCAT('We have ', COUNT(DISTINCT category_code), ' price categories.') AS info
+FROM czechia_price;
+
+SELECT name,
+    SUBSTRING(name, 1, 2) AS prefix,
+    SUBSTRING(name, -2, 2) AS suffix,
+    LENGTH(name)
+FROM czechia_price_category;
+
+/*
+ * Úkol 5: Vyzkoušejte si operátor modulo (zbytek po celočíselném dělení).
+ */
+
+
+
 
 
 
