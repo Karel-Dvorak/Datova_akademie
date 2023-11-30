@@ -1,5 +1,20 @@
+/*
+ * Potřebují k tomu od vás připravit robustní datové podklady, ve kterých bude 
+ * možné vidět porovnání dostupnosti potravin na základě průměrných příjmů za určité časové období.
+ * 
+ * czechia_payroll – Informace o mzdách v různých odvětvích za několikaleté období. Datová sada pochází z Portálu otevřených dat ČR.
+ * czechia_payroll_calculation – Číselník kalkulací v tabulce mezd.
+ * czechia_payroll_industry_branch – Číselník odvětví v tabulce mezd.
+ * czechia_payroll_unit – Číselník jednotek hodnot v tabulce mezd.
+ * czechia_payroll_value_type – Číselník typů hodnot v tabulce mezd.
+ * czechia_price – Informace o cenách vybraných potravin za několikaleté období. Datová sada pochází z Portálu otevřených dat ČR.
+ * czechia_price_category – Číselník kategorií potravin, které se vyskytují v našem přehledu.
+ * 
+ * t_{jmeno}_{prijmeni}_project_SQL_primary_final (pro data mezd a cen potravin za Českou republiku 
+ * sjednocených na totožné porovnatelné období – společné roky)
+*/
 
-CREATE OR REPLACE TABLE t_karel_dvorak_project_sql_primary_final
+CREATE OR REPLACE TABLE t_karel_dvorak_project_SQL_primary_final
 SELECT 
 	base.`year`,
 	base.industry_name,
