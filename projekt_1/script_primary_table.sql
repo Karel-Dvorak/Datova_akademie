@@ -16,7 +16,7 @@
 
 CREATE OR REPLACE TABLE t_karel_dvorak_project_SQL_primary_final
 SELECT 
-	base.`year`,
+	base.date,
 	base.industry_name,
 	base.avg_wages,
 	a.foodstuffs,
@@ -25,7 +25,7 @@ SELECT
 	a.price_unit
 FROM ( 
 	SELECT
-		cpay.payroll_year AS `year`,
+		cpay.payroll_year AS date,
 		cpib2.name AS industry_name,
 		round(avg(cpay.value)) AS avg_wages
 	FROM czechia_payroll cpay
@@ -36,12 +36,12 @@ FROM (
 		AND cpay.value_type_code = 5958
 		AND cpay.industry_branch_code IS NOT NULL
 	GROUP BY cpay.payroll_year, cpay.industry_branch_code  
-	HAVING `year` BETWEEN 2006 AND 2018
+	HAVING date BETWEEN 2006 AND 2018
 	) base
 LEFT JOIN 
 	(
 	SELECT 
-		year(cp.date_from) AS `year`,
+		year(cp.date_from) AS date,
 		cpc.name AS foodstuffs,
 		round(avg(cp.value),2) AS value,
 		cpc.price_value AS price_value,
@@ -51,5 +51,7 @@ LEFT JOIN
 		ON cp.category_code = cpc.code 
 	GROUP BY cp.category_code, year(cp.date_from) 
 	) a
-ON base.`year` = a.`year`
+ON base.date = a.date
 ;
+SELECT *
+FROM t_karel_dvorak_project_sql_primary_final tkdpspf 
