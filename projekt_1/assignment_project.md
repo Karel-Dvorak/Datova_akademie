@@ -20,6 +20,7 @@ czechia_payroll_unit – Číselník jednotek hodnot v tabulce mezd.
 czechia_payroll_value_type – Číselník typů hodnot v tabulce mezd.
 czechia_price – Informace o cenách vybraných potravin za několikaleté období. Datová sada pochází z Portálu otevřených dat ČR.
 czechia_price_category – Číselník kategorií potravin, které se vyskytují v našem přehledu.
+
 Číselníky sdílených informací o ČR:
 czechia_region – Číselník krajů České republiky dle normy CZ-NUTS 2.
 czechia_district – Číselník okresů České republiky dle normy LAU.
@@ -39,6 +40,7 @@ Výzkumné otázky
 
 Výstup projektu
 
-Pomozte kolegům s daným úkolem. Výstupem by měly být dvě tabulky v databázi, ze kterých se požadovaná data dají získat. Tabulky pojmenujte t_{jmeno}_{prijmeni}_project_SQL_primary_final (pro data mezd a cen potravin za Českou republiku sjednocených na totožné porovnatelné období – společné roky) a t_{jmeno}_{prijmeni}_project_SQL_secondary_final (pro dodatečná data o dalších evropských státech).
+Pomozte kolegům s daným úkolem. Výstupem by měly být dvě tabulky v databázi, ze kterých se požadovaná data dají získat. 
+Tabulky pojmenujte t_{jmeno}_{prijmeni}_project_SQL_primary_final (pro data mezd a cen potravin za Českou republiku sjednocených na totožné porovnatelné období – společné roky) a t_{jmeno}_{prijmeni}_project_SQL_secondary_final (pro dodatečná data o dalších evropských státech).
 
 Dále připravte sadu SQL, které z vámi připravených tabulek získají datový podklad k odpovězení na vytyčené výzkumné otázky. Pozor, otázky/hypotézy mohou vaše výstupy podporovat i vyvracet! Záleží na tom, co říkají data.
