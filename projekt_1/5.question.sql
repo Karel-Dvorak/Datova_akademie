@@ -17,18 +17,14 @@ SELECT
 FROM base
 ;
 
-
-SELECT *
-FROM t_karel_dvorak_project_sql_secondary_final tkdpssf 
-
-SELECT *
-FROM v_karel_dvorak_second_question vkdsq ;
-
-SELECT *
+-- tabulka meziročními hodnotami mezd, cen potravin, HDP a celkové HDP
+SELECT 
+	vq4.date,
+	vq4.y_y_wages,
+	vq4.y_y_value,
+	vq5.y_y_GDP,
+	vq5.GDP 
 FROM v_karel_dvorak_four_question vq4 
 JOIN v_karel_dvorak_five_question vq5 
-ON vq4.date = vq5.date ;
-
-
-SELECT *
-FROM v_karel_dvorak_five_question vkdfq 
+ON vq4.date = vq5.date 
+;
