@@ -1,7 +1,7 @@
 -- Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 
 
--- vytvoření pohledu
+-- vytvoření celkové pohledu na růst a pokles mezdy
 CREATE OR REPLACE VIEW v_karel_dvorak_first_question AS
 WITH base AS (
 	SELECT 
@@ -16,14 +16,13 @@ lagged AS (
 		date,
 		industry_name,
 		avg_wages,
-		LAG(avg_wages) OVER (ORDER BY industry_name, date) AS lag_wages
+		LAG(avg_wages) OVER (PARTITION BY industry_name ORDER BY date) AS lag_wages
 	FROM base
 )
 SELECT 
 	*,
 	avg_wages - lag_wages AS diff,
-	CASE
-		WHEN avg_wages - lag_wages != 0 AND  date = '2006' THEN NULL	
+	CASE	
 		WHEN avg_wages - lag_wages >=1 THEN 'Rising'
 		WHEN avg_wages - lag_wages < 1 tHEN 'Falling'
 	END AS rising_falling
@@ -56,4 +55,3 @@ WHERE rising_falling = 'Falling'
 GROUP BY date
 ORDER BY count(date)DESC
 ;
-

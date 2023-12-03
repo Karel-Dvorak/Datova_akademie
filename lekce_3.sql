@@ -317,3 +317,5 @@ SELECT date_from,
 	monthname(date_from) 
 FROM czechia_price ;
 
+SELECT *
+FROM t_karel_dvorak_project_sql_secondary_final tkdpssf 
