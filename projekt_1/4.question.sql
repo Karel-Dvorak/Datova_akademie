@@ -21,8 +21,8 @@ lagged AS (
 )
 SELECT
 	date,
-	round(((year_avg_wages/lag_year_avg_wages)*100)-100,2) AS y_y_wages,
-	round(((year_avg_value/lag_year_avg_value)*100)-100,2) AS y_y_value
+	round((100-(lag_year_avg_wages/year_avg_wages)*100),2) AS y_y_wages,
+	round((100-(lag_year_avg_value/year_avg_value)*100),2) AS y_y_value
 FROM lagged
 ;
 
