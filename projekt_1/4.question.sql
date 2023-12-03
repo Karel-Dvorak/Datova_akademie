@@ -29,5 +29,6 @@ FROM lagged
 -- porovnávací tabulka
 SELECT *
 FROM v_karel_dvorak_four_question vkdfq 
+WHERE y_y_value > y_y_wages 
 ;
 
