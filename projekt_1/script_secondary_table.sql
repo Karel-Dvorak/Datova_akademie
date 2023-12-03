@@ -11,15 +11,15 @@
 CREATE OR REPLACE TABLE t_karel_dvorak_project_SQL_secondary_final
 SELECT 
 	country,
-	`year`,
+	`year` AS date,
 	GDP,
 	gini,
 	population
 FROM economies e 
-WHERE `year` BETWEEN 2006 AND 2018
-	AND country IN (
+WHERE country IN (
 		SELECT country
 		FROM countries c
 		WHERE continent = 'Europe'
 	)
-ORDER BY country, `year`;
+HAVING date BETWEEN 2006 AND 2018
+ORDER BY country, date;
