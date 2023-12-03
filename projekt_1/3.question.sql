@@ -13,12 +13,12 @@ WITH base AS (
 		date,
 		foodstuffs,
 		value,
-		LAG(value,1) OVER (PARTITION BY foodstuffs ORDER BY date) AS lag_value
+		LAG(value) OVER (PARTITION BY foodstuffs ORDER BY date) AS lag_value
 	FROM base
 )
 SELECT
 	*,
-	round(((value/lag_value)*100)-100,2) AS y_y
+	round((100-(lag_value/value)*100),2) AS y_y
 FROM lagged
 ;
 
@@ -29,9 +29,9 @@ SELECT
 	foodstuffs,
 	y_y,
 	CASE 
-		WHEN y_y <= 3 THEN 'růst do 3%'
-		WHEN y_y >= 3 AND y_y <= 10 THEN 'růst do 10%'
-		ELSE 'jiné'
+		WHEN y_y <= 3 THEN 'growth up to 3%'
+		WHEN y_y >= 3 AND y_y <= 10 THEN 'growth up to 10%'
+		ELSE 'other'
 	END AS grow
 FROM v_karel_dvorak_third_question vkdtq
 )
@@ -40,14 +40,12 @@ SELECT
 	grow,
 	count(grow)
 FROM base
-WHERE grow = 'růst do 3%'
+WHERE grow = 'growth up to 3%'
 GROUP BY foodstuffs
 ORDER BY count(grow) DESC  
 ;
 
-/*
- * top 5 nejpomaleji zdražujících potravin
- */
+-- top 5 nejpomaleji zdražujících potravin
 SELECT *
 FROM v_karel_dvorak_third_question vkdtq 
 WHERE foodstuffs = 'Banány žluté'
@@ -55,3 +53,4 @@ WHERE foodstuffs = 'Banány žluté'
 -- foodstuffs = 'Rýže loupaná dlouhozrnná'
 -- foodstuffs = 'Cukr krystalový'
 -- foodstuffs = 'Přírodní minerální voda uhličitá'
+ 
